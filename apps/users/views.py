@@ -5,7 +5,7 @@ from apps.users.form import LoginForm
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 
-
+from apps.users.models import UserProfile
 # Create your views here.
 class LoginView(View):
     def get(self, request, *args, **kwargs):
@@ -20,6 +20,7 @@ class LoginView(View):
         :return:
         """
         # 实例化 LoginForm
+        
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
 
