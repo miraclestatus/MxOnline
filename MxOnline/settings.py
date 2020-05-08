@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'apps.courses.apps.CoursesConfig',
     'crispy_forms',
     'xadmin.apps.XAdminConfig',
-    'apps.organizations.apps.OrganizationsConfig'
+    'apps.organizations.apps.OrganizationsConfig',
+    'pure_pagination',
 
 
 ]
@@ -139,3 +140,9 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 分页相关的设置
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 3, # 主分页部分显示几个
+    'MARGIN_PAGES_DISPLAYED': 2, # 省略号前面或者后面显示几个
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
