@@ -14,13 +14,19 @@ class OrgView(View):
         :return:
         """
         all_orgs = CourseOrg.objects.all()
-        org_nums = CourseOrg.objects.all().count()
         all_citys = City.objects.all()
         # 获取点击的类目
         category = request.GET.get("ct","")
         if category:
             all_orgs = all_orgs.filter(category=category)
 
+        # 对所在城市进行筛选
+        city_id = request.GET.get('city',"")
+        if city_id:
+            if city_id.isdigit():
+                all_orgs = all_orgs.filter(city_id=int(city_id))
+
+        org_nums = all_orgs.count()
 
         try:
             page = request.GET.get('page', 1)
