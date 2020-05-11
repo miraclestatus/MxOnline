@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 
 from apps.organizations.views import OrgView
 from apps.users.views import LoginView
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.static import serve
 from MxOnline.settings import MEDIA_ROOT
 urlpatterns = [
@@ -32,7 +32,10 @@ urlpatterns = [
     path('courselist/',TemplateView.as_view(template_name='course-list.html'), name='course-list'),
     path('login/',LoginView.as_view(), name ='login'),
     # 配置授课机构列表展示
-    path('orglist/',OrgView.as_view(), name='org_list'),
+    # path('orglist/',OrgView.as_view(), name='org_list'),
+    # 授课机构相关操作
+    url(r'^org/', include(('apps.organizations.urls', 'organizations'), namespace='org')),
+
     # 配置上传文件的访问url
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 ]
