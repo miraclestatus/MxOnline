@@ -54,3 +54,8 @@ class OrgView(View):
                        'sort':sort,
                        'hot_orgs':hot_orgs,
                        })
+
+class AddAsk(View):
+    """处理用户咨询模块"""
+    def post(self, request, *args, **kwargs):
+        pass

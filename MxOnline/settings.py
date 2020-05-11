@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'xadmin.apps.XAdminConfig',
     'apps.organizations.apps.OrganizationsConfig',
     'pure_pagination',
+    'apps.operations.apps.OperationsConfig'
 
 
 ]
