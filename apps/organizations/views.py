@@ -26,14 +26,29 @@ class OrgView(View):
             if city_id.isdigit():
                 all_orgs = all_orgs.filter(city_id=int(city_id))
 
+        # 对课程机构近排序
+        sort = request.GET.get('sort',"")
+        if sort == 'students':
+            # 根据学生人数排序  减号代表倒序排序的意思
+            all_orgs = all_orgs.order_by('-students')
+        elif sort == 'courses':
+            # 根据课程数进行排序
+            all_orgs = all_orgs.order_by('-course_nums')
+
         org_nums = all_orgs.count()
 
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_orgs,per_page=10, request=request) # 每页显示多少个
+        p = Paginator(all_orgs,per_page=5, request=request) # 每页显示多少个
         orgs = p.page(page)
 
         return render(request, 'org-list.html',
-                      {'city_id':city_id,'all_orgs':orgs,'org_nums':org_nums,'all_citys':all_citys, 'category':category})
+                      {'city_id':city_id,
+                       'all_orgs':orgs,
+                       'org_nums':org_nums,
+                       'all_citys':all_citys,
+                       'category':category,
+                       'sort':sort,
+                       })
