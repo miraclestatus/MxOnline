@@ -33,3 +33,23 @@ class CourseListView(View):
                        "sort":sort,
                        "hot_courses":hot_courses,
                        })
+
+class CourseDetailView(View):
+    def get(self, request, course_id, *args, **kwargs):
+        """
+        获取课程详情页
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        # 根据id查询课程
+        course = Course.objects.get(id=int(course_id))
+        # 点击到课程 的详情就记录一次点击数
+        course.click_nums += 1
+        course.save()
+
+
+        return render(request, 'course-detail.html',
+                      {"course":course,
+                    })

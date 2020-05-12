@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block custom_bread %}
-    <section>
-        <div class="wp">
-            <ul class="crumbs">
-                <li><a href="{% url 'index' %}">首页</a>></li>
-                <li>公开课</li>
-            </ul>
-        </div>
-    </section>
+<section>
+    <div class="wp">
+        <ul class="crumbs">
+            <li><a href="{% url 'index' %}">首页</a>></li>
+            <li>公开课</li>
+        </ul>
+    </div>
+</section>
 
 {% endblock %}
 {% block content %}
@@ -28,19 +28,19 @@
                             <div class="group_list">
                                 {% for course in all_courses.object_list %}
                                     <div class="box">
-                                        <a href="course-detail.html">
+                                        <a href="{% url 'course:detail' course.id%}">
                                             <img width="280" height="350" class="scrollLoading"
                                                  src="{{ MEDIA_URL }}{{ course.image }}"/>
                                         </a>
                                         <div class="des">
-                                            <a href="course-detail.html">
+                                            <a href="">
                                                 <h2>{{ course.name }}</h2>
                                             </a>
                                             <span class="fl">时长：<i class="key">{{ course.learn_times }}</i></span>
                                             <span class="fr">学习人数：{{ course.students }}&nbsp;&nbsp;</span>
                                         </div>
                                         <div class="bottom">
-                                            <a href="course-detail.html"><span
+                                            <a href=""><span
                                                     class="fl">{{ course.course_org.name }}</span></a>
                                             <span class="star fr  notlogin
                             " data-favid="15">
