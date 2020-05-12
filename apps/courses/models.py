@@ -2,9 +2,11 @@ from django.db import models
 
 
 # Create your models here.
+from apps.organizations.models import CourseOrg
 from apps.users.models import BaseModel
 
 class Course(BaseModel):
+    course_org = models.ForeignKey(CourseOrg, null=True, blank=True, on_delete=models.CASCADE, verbose_name="课程机构")
     name = models.CharField(verbose_name="课程名", max_length=50)
     desc = models.CharField(verbose_name="课程描述", max_length=300)
     learn_times = models.IntegerField(default=0, verbose_name="学习时长（分钟数）")
