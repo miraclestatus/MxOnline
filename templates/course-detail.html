@@ -43,7 +43,7 @@
                 </ul>
                 <div class="btns">
                     <div class="btn colectgroupbtn"  id="jsLeftBtn">
-                          收藏
+                          {% if has_fav_course %}已收藏{% else %}收藏{% endif %}
                     </div>
                         <div class="buy btn"><a style="color: white" href="course-video.html">开始学习</a></div>
                 </div>
@@ -79,7 +79,7 @@
             </a>
             <div class="btn  notlogin
                  "data-favid="14" id="jsRightBtn">
-                 已收藏
+                 {% if has_fav_org %}已收藏{% else %}收藏{% endif %}
             </div>
             <div class="clear">
                 <ul>
