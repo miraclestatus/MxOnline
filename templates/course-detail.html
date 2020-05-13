@@ -147,3 +147,45 @@
 </div>
 </section>
 {% endblock %}
+
+{% block custom_js %}
+<script>
+
+    function add_fav(current_elem, fav_id, fav_type) {
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: '{% url 'op:fav' %}',
+            async: true,
+            data: {'fav_id':fav_id,'fav_type':fav_type },
+            beforeSend: function(xhr, settings){
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function (data) {
+                if (data.status == 'fail'){
+                    if (data.msg == '用户未登录'){
+                        window.location.href = '{% url 'login' %}'
+                    }else {
+                        alert(data.msg)
+                    }
+                }else if(data.status == 'success'){
+                    current_elem.text(data.msg)
+                }
+            }
+                })
+    }
+    {#课程收藏的实现#}
+    $(document).ready(function () {
+        $('#jsLeftBtn').on('click', function () {
+            add_fav($(this), {{ course.id }}, 1)
+        })
+    })
+
+    {#机构收藏的实现#}
+    $(document).ready(function () {
+        $('#jsRightBtn').on('click', function () {
+             add_fav($(this), {{ course.course_org.id }}, 2)
+        })
+    })
+</script>
+{% endblock %}

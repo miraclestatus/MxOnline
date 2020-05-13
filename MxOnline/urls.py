@@ -40,5 +40,7 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     # 课程相关页面
     url(r'^course/', include(('apps.courses.urls', 'courses'), namespace='course')),
+    # 用户操作相关
+    url(r'^op/', include(('apps.operations.urls', 'operations'), namespace='op')),
 
 ]
