@@ -29,18 +29,18 @@
                     {% if user.is_authenticated %}
                         <div class="personal">
                             <dl class="user fr">
-                                <dd>EricLee<img class="down fr" src="./static/images/top_down.png"/></dd>
-                                <dt><img width="20" height="20" src="./static/media/image/2016/12/default_big_14.png"/>
+                                    <dd>{% if user.nick_name %}{{ user.nick_name }}{% else %}{{ user.username }}{% endif %}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                                    <dt><img width="20" height="20" src="{{ user.image.url }}"/></dt>
                                 </dt>
                             </dl>
                             <div class="userdetail">
                                 <dl>
-                                    <dt><img width="80" height="80"
-                                             src="./static/media/image/2016/12/default_big_14.png"/>
+                                      <dt><img width="80" height="80" src="{{ user.image.url }}"/></dt>
+
                                     </dt>
                                     <dd>
-                                        <h2>django</h2>
-                                        <p>EricLee</p>
+                                         <h2>{{ user.nick_name }}</h2>
+                                            <p>{{ user.username }}</p>
                                     </dd>
                                 </dl>
                                 <div class="btn">
