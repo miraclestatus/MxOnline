@@ -96,11 +96,14 @@
                     <div class="box mb40">
                         <h4>资料下载</h4>
                         <ul class="downlist">
-
-                            <li>
-                                <span ><i class="aui-iconfont aui-icon-file"></i>&nbsp;&nbsp;前端页面</span>
-                                <a href="../media/course/resource/2016/11/media.zip" class="downcode" target="_blank" download="" data-id="274" title="">下载</a>
+                            {% for resource in course_resource%}
+                                <li>
+                                <span ><i class="aui-iconfont aui-icon-file"></i>&nbsp;&nbsp;{{resource.name}}</span>
+                                <a href="{{resource.file.url }}" class="downcode" target="_blank" download="" data-id="274" title="">下载</a>
                             </li>
+                            {% endfor %}
+
+
 
                         </ul>
                     </div>
