@@ -4,6 +4,8 @@ from django.views.generic.base import View
 from apps.courses.models import Course
 from apps.operations.models import UserFavorite
 from apps.courses.models import Video
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 class CourseListView(View):
     def get(self, request, *args, **kwargs):
@@ -37,6 +39,7 @@ class CourseListView(View):
                        })
 
 class CourseDetailView(View):
+
     def get(self, request, course_id, *args, **kwargs):
         """
         获取课程详情页
@@ -66,18 +69,16 @@ class CourseDetailView(View):
                        "has_fav_org":has_fav_org
                     })
 
-class CouersLessonView(View):
+class CouersLessonView(LoginRequiredMixin,View):
     """
     章节信息
     """
-
-    def get(self, request, course_id, video_id, *args, **kwargs):
+    login_url = '/login/'
+    def get(self, request, course_id, *args, **kwargs):
         course = Course.objects.get(id=int(course_id))
         # 点击到课程 的详情就记录一次点击数
         course.click_nums += 1
         course.save()
-        video = Video.objects.get(id=int(video_id))
         return render(request, 'course-video.html',
                       {"course": course,
-                        "video":video,
                        })

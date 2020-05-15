@@ -45,7 +45,7 @@
                     <div class="btn colectgroupbtn"  id="jsLeftBtn">
                           {% if has_fav_course %}已收藏{% else %}收藏{% endif %}
                     </div>
-                        <div class="buy btn"><a style="color: white" href="{% url 'course:lesson' course.id %} ">开始学习</a></div>
+                        <a style="color: white" href="{% url 'course:lesson' course.id %} "><div class="buy btn">开始学习</div></a>
                 </div>
             </div>
             <div class="group-share-box">
