@@ -1,7 +1,7 @@
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.views.generic.base import View
-from apps.courses.models import Course
+from apps.courses.models import Course, CourseTag
 from apps.operations.models import UserFavorite, UserCourse
 from apps.courses.models import Video, CourseResource
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -66,11 +66,22 @@ class CourseDetailView(View):
         #课程推荐
         #通过课程的单标签进行课程推荐
 
-        tag = course.tag
-        related_courses = []
-        if tag:
-            related_courses = Course.objects.filter(tag=tag).exclude(id__in=[course.id])[:3]
+        # tag = course.tag
+        # related_courses = []
+        # if tag:
+        #     related_courses = Course.objects.filter(tag=tag).exclude(id__in=[course.id])[:3]
+        #     print(related_courses)
+
+        # 通过 CourseTag类进行课程推荐
+        tags = course.coursetag_set.all()
+        # 遍历
+        tag_list = [tag.tag for tag in tags]
+        course_tags = CourseTag.objects.filter(tag__in=tag_list).exclude(course__id=course.id)
+        related_courses = set()
+        for course_tag in course_tags:
+            related_courses.add(course_tag.course)
             print(related_courses)
+
 
         return render(request, 'course-detail.html',
                       {"course":course,
