@@ -155,3 +155,38 @@ class CouersCommentsView(LoginRequiredMixin,View):
                        "related_courses": related_courses,
                        "comments":comments,
                        })
+class VideoView(LoginRequiredMixin, View):
+    """
+        视频播放页面
+        """
+    login_url = '/login/'
+
+    def get(self, request, course_id, video_id, *args, **kwargs):
+        course = Course.objects.get(id=int(course_id))
+        # 点击到课程 的详情就记录一次点击数
+        course.click_nums += 1
+        course.save()
+        # 加载视频信息
+        video = Video.objects.get(id=int(video_id))
+
+        # 该课的同学还学过
+        # 查询当前用户都学了那些课
+        user_courses = UserCourse.objects.filter(course=course)
+        user_ids = [user_course.user.id for user_course in user_courses]
+        print(user_ids)
+        # 查询这个用户关联的所有课程
+        all_courses = UserCourse.objects.filter(user_id__in=user_ids).order_by("-course__click_nums")[:5]
+        # 过滤掉当前课程
+        related_courses = []
+        for item in all_courses:
+            if item.course.id != course.id:
+                related_courses.append(item.course)
+
+        # 查询资料信息
+        course_resource = CourseResource.objects.filter(course=course)
+        return render(request, 'course-play.html',
+                      {"course": course,
+                       "course_resource": course_resource,
+                       "related_courses": related_courses,
+                       "video":video,
+                       })
