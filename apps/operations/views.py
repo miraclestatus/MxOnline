@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from apps.operations.forms import UserFavForm, CommentForm
 from django.http import JsonResponse
-from apps.operations.models import UserFavorite
+from apps.operations.models import UserFavorite, CourseComments
 from apps.courses.models import Course
 from apps.organizations.models import CourseOrg
 from apps.organizations.models import Teacher
@@ -73,7 +73,24 @@ class CommentView(View):
             })
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            pass
+            course = comment_form.cleaned_data["course"]
+            comments = comment_form.cleaned_data["comments"]
+
+            comment = CourseComments()
+            comment.user = request.user
+            comment.comments = comments
+            comment.course = course
+            comment.save()
+
+            return JsonResponse({
+                "status":"success",
+            })
+        else:
+            return JsonResponse({
+                "status": "success",
+                "msg":'参数错误'
+            })
+
 
 
 
