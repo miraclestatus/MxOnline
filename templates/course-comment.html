@@ -187,7 +187,6 @@
 </div>
 </div>
 {% endblock %}
-
 {% block custom_js %}
     <script type="text/javascript">
         //添加评论
@@ -201,16 +200,16 @@
                 $.ajax({
                     cache: false,
                     type: "POST",
-                    url: "/course/add_comment/",
-                    data: {'course_id': 10, 'comments': comments},
+                    url: "{% url 'op:comment'%}",
+                    data: {'course': {{ course.id }}, 'comments': comments},
                     async: true,
                     beforeSend: function (xhr, settings) {
-                        xhr.setRequestHeader("X-CSRFToken", "5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy");
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
                     },
                     success: function (data) {
                         if (data.status == 'fail') {
                             if (data.msg == '用户未登录') {
-                                window.location.href = "login.html";
+                                window.location.href = "{% url 'login' %}";
                             } else {
                                 alert(data.msg)
                             }
