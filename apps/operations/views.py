@@ -115,6 +115,7 @@ class IndexView(View):
             "banners":banners,
             "courses":courses,
             "course_orgs":course_orgs,
+            "banner_courses":banner_courses
 
         })
 
