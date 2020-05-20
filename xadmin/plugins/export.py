@@ -230,10 +230,11 @@ class ExportPlugin(BaseAdminPlugin):
         response.write(getattr(self, 'get_%s_export' % file_type)(context))
         return response
 
-    # View Methods
     def get_result_list(self, __):
         if self.request.GET.get('all', 'off') == 'on':
             self.admin_view.list_per_page = sys.maxsize
+            self.admin_view.list_display = getattr(self.admin_view, 'list_export_fields', self.admin_view.list_display)
+
         return __()
 
     def result_header(self, item, field_name, row):

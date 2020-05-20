@@ -15,9 +15,12 @@ class BaseSettings(object):
 
 class CourseAdmin(object):
     list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students']
+    list_export = ('xls', 'xml', 'json')
+    list_export_fields = ('name', 'desc', 'detail', 'degree', 'learn_times', 'students')
     search_fields = ['name', 'desc', 'detail', 'degree', 'students']
     list_filter = ['name', 'teacher__name', 'desc', 'detail', 'degree', 'learn_times', 'students']
     list_editable = ["degree", "desc"]
+
 
 
 

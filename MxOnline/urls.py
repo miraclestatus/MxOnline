@@ -19,6 +19,7 @@ import xadmin
 # from apps.users import views
 from django.views.generic import TemplateView
 
+from apps.operations.views import IndexView
 from apps.organizations.views import OrgView
 from apps.users.views import LoginView, LogoutView
 from django.conf.urls import url, include
@@ -28,8 +29,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('xadmin/', xadmin.site.urls),
     # path('', views.index),
-    path('',TemplateView.as_view(template_name='index.html'), name='index'),
-    path('courselist/',TemplateView.as_view(template_name='course-list.html'), name='course-list'),
+    # path('',TemplateView.as_view(template_name='index.html'), name='index'),
+    path('',IndexView.as_view(), name='index'),
+    # path('courselist/',TemplateView.as_view(template_name='course-list.html'), name='course-list'),
     path('login/',LoginView.as_view(), name ='login'),
     path('logout/',LogoutView.as_view(), name ='logout'),
     # 配置授课机构列表展示

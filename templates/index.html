@@ -5,42 +5,14 @@
             <div class="fl">
                 <div class="imgslide">
                     <ul class="imgs">
-
-                        <li>
-                            <a href="#">
-                                <img width="1200" height="478"
-                                     src="/static/media/banner/2016/11/57a801860001c34b12000460.jpg"/>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img width="1200" height="478"
-                                     src="/static/media/banner/2016/11/57aa86a0000145c512000460.jpg"/>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img width="1200" height="478"
-                                     src="/static/media/banner/2016/11/57a801860001c34b12000460_z4Vb8zl.jpg"/>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img width="1200" height="478"
-                                     src="/static/media/banner/2016/11/57aa86a0000145c512000460_nMwvoQD.jpg"/>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img width="1200" height="478"
-                                     src="/static/media/banner/2016/11/57aa86a0000145c512000460_GXIBATC.jpg"/>
-                            </a>
-                        </li>
-
+                    {% for banner in banners %}
+                    <li>
+                        <a href="{{ banner.url }}">
+                            <img width="1200" height="478"
+                                 src="{{ banner.image.url }}"/>
+                        </a>
+                    </li>
+                    {% endfor %}
 
                     </ul>
                 </div>
@@ -86,7 +58,7 @@
                     <div class="module1_1 left">
                         <img width="228" height="614" src="/static/images/module1_1.jpg"/>
                         <p class="fisrt_word">名师授课<br/>专业权威</p>
-                        <a class="more" href="course-list.html">查看更多课程 ></a>
+                        <a class="more" href="{% url 'course:list' %}">查看更多课程 ></a>
                     </div>
                     <div class="right group_list">
                         <div class="module1_2 box">
@@ -113,112 +85,24 @@
                             <div class="unslider-arrow2 next"></div>
                         </div>
 
-                        <div class="module1_3 box">
-                            <a href="course-detail.html">
-                                <img width="233" height="190" src="/static/media/courses/2016/11/mysql.jpg"/>
+                        {% for course in courses %}
+                         <div class="module1_{{ forloop.counter|add:2 }} box">
+                            <a href="{% url 'course:detail' course.id %}">
+                                <img width="233" height="190" src="{{ course.image.url }}"/>
                             </a>
                             <div class="des">
                                 <a href="course-detail.html">
-                                    <h2 title="django入门">django入门</h2>
+                                    <h2 title="{{ course.name }}">{{ course.name }}</h2>
                                 </a>
-                                <span class="fl">难度：<i class="key">初级</i></span>
-                                <span class="fr">学习人数：3</span>
+                                <span class="fl">难度：<i class="key">{{course.get_degree_display}}</i></span>
+                                <span class="fr">学习人数：{{ course.students }}</span>
                             </div>
                             <div class="bottom">
-                                <span class="fl" title="慕学网">慕学网</span>
-                                <span class="star fr">0</span>
+                                <span class="fl" title="{{course.course_org.name}}">{{course.course_org.name}}</span>
+                                <span class="star fr">{{ course.fav_nums }}</span>
                             </div>
                         </div>
-
-                        <div class="module1_4 box">
-                            <a href="course-detail.html">
-                                <img width="233" height="190"
-                                     src="/static/media/courses/2016/11/57035ff200014b8a06000338-240-135.jpg"/>
-                            </a>
-                            <div class="des">
-                                <a href="course-detail.html">
-                                    <h2 title="java入门">java入门</h2>
-                                </a>
-                                <span class="fl">难度：<i class="key">中级</i></span>
-                                <span class="fr">学习人数：0</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="fl" title="北京大学">北京大学</span>
-                                <span class="star fr">0</span>
-                            </div>
-                        </div>
-
-                        <div class="module1_5 box">
-                            <a href="course-detail.html">
-                                <img width="233" height="190"
-                                     src="/static/media/courses/2016/11/540e57300001d6d906000338-240-135.jpg"/>
-                            </a>
-                            <div class="des">
-                                <a href="course-detail.html">
-                                    <h2 title="python入门">python入门</h2>
-                                </a>
-                                <span class="fl">难度：<i class="key">中级</i></span>
-                                <span class="fr">学习人数：0</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="fl" title="南京大学">南京大学</span>
-                                <span class="star fr">0</span>
-                            </div>
-                        </div>
-
-                        <div class="module1_6 box">
-                            <a href="course-detail.html">
-                                <img width="233" height="190"
-                                     src="/static/media/courses/2016/11/57035ff200014b8a06000338-240-135_dHfj8Nq.jpg"/>
-                            </a>
-                            <div class="des">
-                                <a href="course-detail.html">
-                                    <h2 title="java入门2">java入门2</h2>
-                                </a>
-                                <span class="fl">难度：<i class="key">高级</i></span>
-                                <span class="fr">学习人数：0</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="fl" title="慕学网2">慕学网2</span>
-                                <span class="star fr">0</span>
-                            </div>
-                        </div>
-
-                        <div class="module1_7 box">
-                            <a href="course-detail.html">
-                                <img width="233" height="190"
-                                     src="/static/media/courses/2016/11/57035ff200014b8a06000338-240-135_0nFiBSI.jpg"/>
-                            </a>
-                            <div class="des">
-                                <a href="course-detail.html">
-                                    <h2 title="java入门3">java入门3</h2>
-                                </a>
-                                <span class="fl">难度：<i class="key">初级</i></span>
-                                <span class="fr">学习人数：1</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="fl" title="慕学网3">慕学网3</span>
-                                <span class="star fr">0</span>
-                            </div>
-                        </div>
-
-                        <div class="module1_8 box">
-                            <a href="course-detail.html">
-                                <img width="233" height="190"
-                                     src="/static/media/courses/2016/11/540e57300001d6d906000338-240-135_MSIqfvw.jpg"/>
-                            </a>
-                            <div class="des">
-                                <a href="course-detail.html">
-                                    <h2 title="python入门2">python入门2</h2>
-                                </a>
-                                <span class="fl">难度：<i class="key">中级</i></span>
-                                <span class="fr">学习人数：0</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="fl" title="慕学网666">慕学网666</span>
-                                <span class="star fr">0</span>
-                            </div>
-                        </div>
+                        {% endfor %}
 
                     </div>
                 </div>
