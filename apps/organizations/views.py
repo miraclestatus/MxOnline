@@ -73,3 +73,29 @@ class AddAsk(View):
                 "msg": "添加出错"
             })
 
+class TeacherListView(View):
+    def get(self, request, *args, **kwargs):
+        all_teachers = Teacher.objects.all()
+        teacher_nums = all_teachers.count()
+
+        hot_teachers = Teacher.objects.all().order_by("-click_nums")[:3]
+
+
+        # 讲师分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(all_teachers,per_page=5, request=request) # 每页显示多少个
+        teachers = p.page(page)
+
+        return render(request,'teachers-list.html',{
+            "teachers":teachers,
+        })
+class TeacherDeatailView(View):
+    def get(self, request, teacher_id,*args, **kwargs):
+        teacher = Teacher.objects.get(id=int(teacher_id))
+        return render(request, 'teacher-detail.html', {
+            "teacher":teacher
+        })
+

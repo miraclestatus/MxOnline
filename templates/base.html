@@ -91,10 +91,10 @@
                                     公开课<img class="hot" src="/static/images/nav_hot.png">
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">授课教师</a>
+                            <li class="{% if request.path|slice:'13' == '/org/teachers' %}active{% endif %}">
+                                <a href="{% url 'org:teachers' %}">授课教师</a>
                             </li>
-                            <li  class="{% if request.path|slice:'4' == '/org' %}active{% endif %}"><a href="{% url 'org:list' %}">授课机构</a></li>
+                            <li  class="{% if request.path|slice:'13' != '/org/teachers' %}active{% endif %}"><a href="{% url 'org:list' %}">授课机构</a></li>
                         </ul>
                     </div>
                 </div>
