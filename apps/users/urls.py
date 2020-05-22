@@ -4,5 +4,7 @@ from apps.users.views import UserInfoView
 
 urlpatterns = [
     url(r'^info/$', UserInfoView.as_view(), name='info'),
+    # url(r'^mycourse/$', MyCourseView.as_view(), name='mycourse'),
+
 
 ]
