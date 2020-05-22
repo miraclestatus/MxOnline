@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from apps.users.form import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from apps.users.models import UserProfile
 # Create your views here.
@@ -52,3 +53,8 @@ class LogoutView(View):
         logout(request)
         # 重定向到网站首页
         return HttpResponseRedirect(reverse("index"))
+class UserInfoView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'usercenter-info.html')
