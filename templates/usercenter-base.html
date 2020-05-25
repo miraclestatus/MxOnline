@@ -86,8 +86,8 @@
                 </li>
                 <li class="{% if current_page == 'mycourse' %}active2{% endif %}"><a href="{% url 'users:mycourse' %}">我的课程</a>
                 </li>
-                <li class="{% if current_page == 'myfav' %}active2{% endif %}"><a
-                        href="usercenter-fav-course.html">我的收藏</a></li>
+                <li class="{% if current_page == 'myfavorg' %}active2{% endif %}"><a
+                        href="{% url 'users:myfavorg' %}">我的收藏</a></li>
                 <li class="{% if current_page == 'message' %}active2{% endif %}">
                     <a href="usercenter-message.html" style="position: relative;">
                         我的消息
